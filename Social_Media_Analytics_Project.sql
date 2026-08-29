@@ -236,8 +236,8 @@ group by category;
  
  select a.username , 
              p.posttitle 
- from accounts 
- inner join posts
+ from accounts as a
+ inner join posts as p
  on a.accountid = p.accountid;
  
  /* Q2.Display the username, post title, category, and likes for every post */
@@ -246,8 +246,8 @@ group by category;
           p.posttitle, 
 		  p.category,
 		  p.likes
- from accounts
- inner join posts
+ from accounts as a
+ inner join posts as p
  on a.accountid = p.accountid;
 
 /*  Q3.Find the users who created posts with more than 500 likes */
@@ -255,8 +255,8 @@ group by category;
 select a.username,
 		p.posttitle, 
 		p.likes
- from accounts
- inner join posts
+ from accounts as a
+ inner join posts as p
  on a.accountid = p.accountid 
  where likes > 500;
 
@@ -265,8 +265,8 @@ select a.username,
 select a.username,
 		p.posttitle,
         p.comments
-from accounts 
-inner join posts 
+from accounts as a
+inner join posts as p
 on a.accountid = p.accountid
 where comments > 100;
 
@@ -401,12 +401,12 @@ select posts.posttitle,
 from posts 
 where likes > (select avg(likes) from posts);
 
-/* Q3. Users whose followers are greater than RAMYA_RAMI@07 */
+/* Q3. Users whose followers are greater than RAMYA_RAMI@10 */
 
 select accounts.username , 
         accounts.followers 
 from accounts 
-where followers > (select followers from accounts where username ='RAMYA_RAMI@07');
+where followers > (select followers from accounts where username ='RAMYA_RAMI@10');
 
 /* Q4. Post with the highest number of comments */
 
@@ -458,7 +458,7 @@ select accounts.username,
 from accounts 
 inner join posts 
 on accounts.accountid = posts.accountid 
-group by username 
+group by  accounts.username 
 order by total_engagement desc 
 limit 1;
 
